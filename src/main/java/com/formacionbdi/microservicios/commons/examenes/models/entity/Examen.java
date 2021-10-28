@@ -3,6 +3,9 @@ package com.formacionbdi.microservicios.commons.examenes.models.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +18,8 @@ public class Examen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
+    @Size(min = 4, max = 30)
     private String nombre;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -25,6 +30,7 @@ public class Examen {
     @OneToMany(mappedBy = "examen", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pregunta> preguntas;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     private Asignatura asignatura;
 
